@@ -169,7 +169,6 @@ button:hover {
   }
 }
 
-
 .col-9 {
   -webkit-box-flex: 0;
   -webkit-flex: 0 0 75%;
@@ -261,14 +260,16 @@ fieldset {
     margin-left: 77%;
 }
 #back1 {
-    margin-top: -11%;
+    margin-top: -8%;
 }
 button {
   outline: none;
   background: none;
   border: none;
 }
-
+#enviars {
+    margin-left: 61%;
+}
 /* ==========================================================================
    #PAGE WRAPPER
    ========================================================================== */
@@ -562,6 +563,31 @@ input {
   user-select: none;
 }
 
+.m-r-56 {
+    margin-right: 28px;
+    margin-top: 11px;
+}
+
+.m-r-57 {
+    margin-right: 188px;
+    margin-top: 7px;
+}
+.m-r-58 {
+    margin-right: 50px;
+    margin-top: 7px;
+}
+.m-r-59 {
+    margin-right: 50px;
+    margin-top: 7px;
+}
+.m-r-60 {
+    margin-right: 70px;
+    margin-top: 7px;
+}
+.m-r-61 {
+    margin-right: 117px;
+    margin-top: 7px;
+}
 .radio-container input {
   position: absolute;
   opacity: 0;

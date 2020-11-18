@@ -41,13 +41,13 @@
                                 <div class="row row-space">
                                     <div class="col-2">
                                         <div class="input-group-desc">
-                                            <input class="input--style-5" type="text" name="first_name">
+                                            <input class="input--style-5" type="text" name="first_name" id="first_name">
                                             <label class="label--desc">Nombre</label>
                                         </div>
                                     </div>
                                     <div class="col-2">
                                         <div class="input-group-desc">
-                                            <input class="input--style-5" type="text" name="last_name">
+                                            <input class="input--style-5" type="text" name="last_name" id="last_name">
                                             <label class="label--desc">Apellido</label>
                                         </div>
                                     </div>
@@ -58,7 +58,15 @@
                             <div class="name">Código</div>
                             <div class="value">
                                 <div class="input-group">
-                                    <input class="input--style-5" type="text" name="company">
+                                    <input class="input--style-5" type="text" name="codigo" id="codigo">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="name">Contraseña</div>
+                            <div class="value">
+                                <div class="input-group">
+                                    <input class="input--style-5" type="password" name="password" id="password">
                                 </div>
                             </div>
                         </div>
@@ -66,7 +74,7 @@
                             <div class="name">Email</div>
                             <div class="value">
                                 <div class="input-group">
-                                    <input class="input--style-5" type="email" name="email">
+                                    <input class="input--style-5" type="email" name="email" id="email">
                                 </div>
                             </div>
                         </div>
@@ -74,12 +82,36 @@
                           <div class="name">Teléfono</div>
                           <div class="value">
                               <div class="input-group">
-                                  <input class="input--style-5" type="number" name="phone">
+                                  <input class="input--style-5" type="number" name="phone" id="phone">
+                              </div>
+                          </div>
+                        </div>
+                        <div class="form-row m-b-55">
+                          <div class="name">Modalidad de Estudio</div>
+                          <div class="value">
+                              <div class="input-group">
+                                  <input class="input--style-5" type="text" name="mestudio" id="mestudio">
+                              </div>
+                          </div>
+                        </div>
+                        <div class="form-row m-b-55">
+                          <div class="name">Semestre</div>
+                          <div class="value">
+                              <div class="input-group">
+                                  <input class="input--style-5" type="text" name="semestre" id="semestre">
+                              </div>
+                          </div>
+                        </div>
+                        <div class="form-row m-b-55">
+                          <div class="name">Proyecto curricular</div>
+                          <div class="value">
+                              <div class="input-group">
+                                  <input class="input--style-5" type="text" name="pcurricular" id="pcurricular">
                               </div>
                           </div>
                         </div>
                         <div class="form-row">
-                            <div class="name">Sede</div>
+                            <div class="name">Facultad</div>
                             <div class="value">
                                 <div class="input-group">
                                     <div class="rs-select2 js-select-simple select--no-search">
@@ -98,7 +130,7 @@
                             </div>
                         </div>
                         <div class="form-row p-t-20">
-                            <label class="label label--block">Are you an existing customer?</label>
+                            <label class="label label--block"></label>
                             <div class="p-t-15">
                                 <label class="radio-container m-r-55">Yes
                                     <input type="radio" checked="checked" name="exist">
