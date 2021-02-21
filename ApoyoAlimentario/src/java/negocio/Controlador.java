@@ -7,7 +7,7 @@ package negocio;
 import datos.BeneficiarioDAO;
 import datos.ConvocatoriaDAO;
 import datos.EstudianteDAO;
-import datos.InfoSocioEconomicaDAO;
+import datos.SocioeconomicoDAO;
 import datos.SolicitudDAO;
 import datos.LoginDAO;
 import datos.ProcesoDAO;
@@ -31,10 +31,10 @@ public class Controlador {
        return loginDAO.loginBD();//ejecuta el loggeo y devuelve el error
     }
     
-    public Mensajes crearInfoSocioeconomi(String usuario, String contrasenia,Socioeconomico eco){
-        logearse(usuario, contrasenia);//se loggea como estudiante
-        InfoSocioEconomicaDAO socioDAO = new InfoSocioEconomicaDAO();
-        return socioDAO.incluirInfoSocioEconomica(eco);//Devuelve un mensaje de error o de éxito
+    public Mensajes crearInfoSocioeconomica(Socioeconomico eco){
+        logearseComoAdmin();
+        SocioeconomicoDAO socio = new SocioeconomicoDAO ();
+        return socio.incluirInfoSocioEconomica(eco);//Devuelve un mensaje de error o de éxito
     }
     
     public String crearProceso(String usuario, String contrasenia,Proceso p){
@@ -43,10 +43,10 @@ public class Controlador {
        return procDAO.incluirProceso(p);//Devuelve un mensaje de error o de éxito  
     }
     
-    public String crearSocilicitud(String usuario,String contrasenia, Solicitud s){
-        logearse(usuario, contrasenia);//loggearse como estudiante    
+    public String crearSocilicitud( String usuario, String contrasenia,Solicitud s, int llavesSocio[]){
+        logearse(usuario,contrasenia);//loggearse como admin 
         SolicitudDAO solicitudDAO = new SolicitudDAO(); 
-        return solicitudDAO.incluirSolicitud(s);//realiza el proceso de incluir solicitud y devuelve el mensaje
+        return solicitudDAO.incluirSolicitud(s,llavesSocio);//realiza el proceso de incluir solicitud y devuelve el mensaje
     }
     
     public String verEstadoSocilitud(Long id){//ver estado de solicitud, correcto
@@ -54,9 +54,9 @@ public class Controlador {
         SolicitudDAO solicitudDAO = new SolicitudDAO();
         return solicitudDAO.verEstadoSolicitud(id);//devuelve el estado de la solicitud o un error.
     }
+    /*
     public PedirSolicitudes verlinksSocioeco(String usuario, String contrasenia,PedirSolicitudes solicitudes){
-         InfoSocioEconomicaDAO eco = new InfoSocioEconomicaDAO();
-         ArrayList<Socioeconomico> socio = new ArrayList();
+         InfoSocioEcoSocioeconomicoDAOnfoSocioEconomiSocioeconomicoDAOayList<Socioeconomico> socio = new ArrayList();
          for (int i = 0; i < solicitudes.getSolicitudes().size(); i++) {
              logearse(usuario, contrasenia);
              Socioeconomico so = eco.verLinks(solicitudes.getSolicitudes().get(i).getNumSocioEconomico());
@@ -65,6 +65,7 @@ public class Controlador {
         solicitudes.setSocioEconomico(socio);
         return solicitudes;
     }
+    */
     public String crearEstudiante(Estudiante es, String usuario, String contrasenia ){
         logearseComoCreador();// se loggea como creador
         EstudianteDAO estudiante = new EstudianteDAO();
@@ -73,25 +74,19 @@ public class Controlador {
    
     
     public PedirSolicitudes verSolicitudes(String usuario, String contrasenia){
-        logearse(usuario, contrasenia);
+        logearse(usuario, contrasenia);//se debe loggear como admin
         SolicitudDAO solicitudDAO = new SolicitudDAO();
-        return verlinksSocioeco(usuario, contrasenia, solicitudDAO.verTodasLasSolicitudes());//devuelve un arraylist con todas las solicitudes pendientes
+        return solicitudDAO.verTodasLasSolicitudes();//devuelve un arraylist con todas las solicitudes pendientes incluida la ruta de esa solicitud
 
     }
     
-    public String validarSolicitudes(ArrayList<Solicitud> solicitudes, String usuario, String contrasenia){//duda de esta actualizacion
-        String mensaje = "";
-        for(int i = 0; i < solicitudes.size();i++){
-          logearse(usuario, contrasenia);//se loggea como un encargado
-          SolicitudDAO solicitudDAO = new SolicitudDAO();  
-          mensaje += solicitudDAO.validarTodasLasSolicitudes(solicitudes.get(i));//Devuele un mensaje de error o éxito
-        }
-        return mensaje;
+    public String validarSolicitud(int llave, String usuario, String contrasenia, String estado, String comentario, String id_supervisor){//recibe la llave de la solicitud a modificar y se asigna la llave del supervisor correspondiente ingresando su numero de identificacion.
+        logearse(usuario, contrasenia);//se loggea como un supervisor
+        SolicitudDAO solicitudDAO = new SolicitudDAO();  
+        return solicitudDAO.aprobaroRechazarSolicitud(llave, estado, comentario, id_supervisor);
     }
 
-    
-    
-    public String logearseComoCreador(){//login de CREADOR = Supervisor 
+    public String logearseComoCreador(){//
         Login login = new Login();
         LoginDAO loginDAO = new LoginDAO();
         login.setUserBD("creador");
@@ -109,14 +104,7 @@ public class Controlador {
         loginDAO.setLogin(login);
         return loginDAO.loginBD(); 
     }
-  
-    
-    public Mensajes crearInfoSocioeconomica(String usuario, String contrasenia,Socioeconomico eco){
-        logearse(usuario, contrasenia);//se loggea como estudiante
-        InfoSocioEconomicaDAO socioDAO = new InfoSocioEconomicaDAO();
-        return socioDAO.incluirInfoSocioEconomica(eco);//Devuelve un mensaje de error o de éxito
-        
-    }
+ 
     
     public String crearBeneficiario(Beneficiario bene, String usuario, String contrasenia){
         logearseComoAdmin();
@@ -175,5 +163,23 @@ public class Controlador {
         return convocatoriaDAO.eliminarConvocatoria(indice);
     }
     
+    public String eliminarSocioeconomico(int indice){
+        logearseComoAdmin();
+        SocioeconomicoDAO socioeconomicoDAO = new SocioeconomicoDAO();
+        return socioeconomicoDAO.eliminarSocioeconomico(indice);
+    }
+    
+    public String modificarCondicionSocioeconomico(int indice, String condicion){
+        logearseComoAdmin();
+        SocioeconomicoDAO socioeconomicoDAO = new SocioeconomicoDAO();
+        return socioeconomicoDAO.actualizarCondicion(indice,condicion);
+    }
+    
+    public String eliminarSolicitud(int indice){
+        logearseComoAdmin();
+        SolicitudDAO socioeconomicoDAO = new SolicitudDAO();
+        return socioeconomicoDAO.eliminarSolicitud(indice);
+    }
+     
     
 }

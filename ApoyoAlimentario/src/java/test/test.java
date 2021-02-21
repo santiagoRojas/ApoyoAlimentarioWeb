@@ -56,33 +56,16 @@ public class test {
     // JOptionPane.showMessageDialog(null, control.logearse("CREADOR","CREADOR"));
     
 
-   /*
-    Socioeconomico socio = new Socioeconomico();
-    socio.setCodigo(52154);
-    socio.setAutoSostiene("SI");
-    socio.setCartaIndependiente("direccion en disco");
-    socio.setCartaLaboral("direccion en disco");
-    socio.setCartaRector("direccion en disco");
-    socio.setCertificadoDesplazamiento("direccion en disco");
-    socio.setCertificadoDiscapacidad("direccion en disco");
-    socio.setCertificadoIngresosReten("direccion en disco");
-    socio.setCondicionEsp("NO");
-    socio.setDiscapacidad("NO");
-    socio.setEstratificacion("Direccion");
-    socio.setExamenMedico("Direccion en disco");
-    socio.setFactura("Direccion en disco");
-    socio.setFormulario("direccion en disco");
-    socio.setIngresos(20);
-    socio.setNucleo("NO");
-    socio.setPatologia("NO");
-    socio.setPersonasCargo("NO");
-    socio.setReciboPago("direccion recibo");
-    socio.setRegistroCivil("direccion registro");
-    socio.setResideZona("NO");
-    socio.setSostieneHogar("NO");
-    socio.setValormatricula(10500000);
-    socio.setViveConEmpleador("NO");
-    */
+   
+    //Socioeconomico socio = new Socioeconomico();
+    /*
+    socio.setCodigo(25);
+    socio.setNombreCondicion("Vive en casa del empleador");
+    socio.setPuntaje(0);
+  */
+    Controlador con = new Controlador();
+   // System.out.println(con.eliminarSolicitud(2));
+    
    
    /*
    Proceso proc = new Proceso ();
@@ -91,28 +74,35 @@ public class test {
    proc.setFechaFin(new java.sql.Date(2018,04,14));
    proc.setNombre("Proceso");
    */
-  /*
+  
    Solicitud so = new Solicitud();
-   so.setNum(15617);
-   so.setAnio(2020);
-   so.setCodEstudiante(201520200);
+   //tabla solicitud
+   so.setPuntaje(45);
+   so.setFecha("20-10-2020");
    so.setEstado("PENDIENTE");
-   so.setFecha(new java.sql.Date(2015,8,23));
-   so.setNumSocioEconomico(52154);
-   so.setNumSupervisor(17);//crear supervisor
-   so.setPuntaje(215);
-   so.setSemestre(1);
-   System.out.println(control.crearSocilicitud("CREADOR", "CREADOR",so));//ver estado solicitud, correcto 
-   */
-
-   //System.out.println(control.verEstadoSocilitud("CREADOR", "CREADOR",15616));//ver estado solicitud, correcto 
-  // ArrayList<Solicitud> s = new ArrayList();
-  //System.out.println(control.verSolicitudes("CREADOR", "CREADOR").get(0).getEstado());//Devuelve un arraylist con todas las solicitudes, coorecto
- /*
-    ArrayList<Solicitud> soli = new ArrayList();
-    soli = control.verSolicitudes("CREADOR", "CREADOR");
-    System.out.println(control.validarSolicitudes(soli,"CREADOR", "CREADOR"));//Valida todas las solicitudes, correcto.
-    */
+   so.setExplicacion_estado("lool");
+   so.setNumSupervisor(3);
+   so.setCodEstudianteSt("20192050052");
+   so.setNumConvocatoria(25);
+   //so.setFecha(new java.sql.Date(2015,8,23));
+   
+   //tabla solicitud_socioecono
+   //se insertan por defecto por debajo
+   //tabla socioecono_doc
+   so.setCodigoDoc(7);
+   so.setRutaDoc("c:Documentos");
+   int keys[] = {21,22,25};
+   
+   Convocatoria conv = new Convocatoria();
+   //conv.setCodigo(0);
+   //conv.setFechaFin(new java.sql.Date(2015,10,23));
+   //conv.setFechaInicio(new java.sql.Date(2015,8,23));
+   //conv.setSemestre(3);
+   //conv.setTipoProceso(3);
+   //conv.setAnio(2015);
+   //System.out.println(control.crearSocilicitud(so,keys));//ver estado solicitud, correcto 
+   //System.out.println(control.actualizarConvocatoria("cr1030681971", "123", 500,new java.sql.Date(2015,8,23) , new java.sql.Date(2015,7,23)));
+   System.out.println(control.verSolicitudes("cr1030681971", "123").getSolicitudes().get(0).getNumSolicitud());
     }
       
 }

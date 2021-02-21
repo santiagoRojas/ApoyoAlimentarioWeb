@@ -6,51 +6,58 @@
 package negocio;
 
 import java.util.Date;
-
+import java.math.BigInteger;
 
 /**
  *
  * @author Jorge_Andres
  */
 public class Solicitud {
-    private int num;
-    private Integer puntaje;
-    private Integer semestre;
-    private Integer anio;
-    private Date fecha;
-    private String fechaActual;
+    
+    private int numSolicitud;
+    private int puntaje;
+    private int semestre;
+    private String Fecha;
     private String estado;
+    private String explicacion_estado;
+    
     private int numSupervisor;
-    private int numSocioEconomico;
-    private Long codEstudiante;
-
-    public Long getCodEstudiante() {
-        return codEstudiante;
-    }
-
-    public void setCodEstudiante(Long codEstudiante) {
-        this.codEstudiante = codEstudiante;
-    }
-
-    public String getFechaActual() {
-        return fechaActual;
-    }
-
-    public void setFechaActual(String fechaActual) {
-        this.fechaActual = fechaActual;
-    }
+    private int numConvocatoria;
+    private String codEstudianteSt;
     
-    
- 
-    public int getNum() {
-        return num;
-    }
-
-    public void setNum(int num) {
-        this.num = num;
-    }
-
+    //solicitud_socioecono
+    private int codSocioeco;
    
+    
+    //solicitud_doc
+    private int codigoDoc;
+    private String rutaDoc;
+  
+    public int getNumSolicitud() {
+        return numSolicitud;
+    }
+
+    //métodos accesores
+    public void setNumSolicitud(int numSolicitud) {  
+        this.numSolicitud = numSolicitud;
+    }
+
+    public int getPuntaje() {
+        return puntaje;
+    }
+
+    public void setPuntaje(int puntaje) {
+        this.puntaje = puntaje;
+    }
+
+    public int getSemestre() {
+        return semestre;
+    }
+
+    public void setSemestre(int semestre) {
+        this.semestre = semestre;
+    }
+
     public String getEstado() {
         return estado;
     }
@@ -59,56 +66,73 @@ public class Solicitud {
         this.estado = estado;
     }
 
-    public Integer getAnio() {
-        return anio;
+    public String getExplicacion_estado() {
+        return explicacion_estado;
     }
 
-    public void setAnio(Integer anio) {
-        this.anio = anio;
+    public void setExplicacion_estado(String explicacion_estado) {
+        this.explicacion_estado = explicacion_estado;
     }
 
-
-    public Date getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
-
-    public Integer getPuntaje() {
-        return puntaje;
-    }
-
-    public void setPuntaje(Integer puntaje) {
-        this.puntaje = puntaje;
-    }
-
-    public Integer getSemestre() {
-        return semestre;
-    }
-
-    public void setSemestre(Integer semestre) {
-        this.semestre = semestre;
-    }
-
-    public Integer getNumSupervisor() {
+    public int getNumSupervisor() {
         return numSupervisor;
     }
 
-    public void setNumSupervisor(Integer numSupervisor) {
+    public void setNumSupervisor(int numSupervisor) {
         this.numSupervisor = numSupervisor;
     }
 
-    public Integer getNumSocioEconomico() {
-        return numSocioEconomico;
+    public int getNumConvocatoria() {
+        return numConvocatoria;
     }
 
-    public void setNumSocioEconomico(Integer numSocioEconomico) {
-        this.numSocioEconomico = numSocioEconomico;
+    public void setNumConvocatoria(int numConvocatoria) {
+        this.numConvocatoria = numConvocatoria;
     }
 
+    public String getCodEstudianteSt() {
+        return codEstudianteSt;
+    }
 
+    public void setCodEstudianteSt(String codEstudiante) {
+        this.codEstudianteSt = codEstudiante;
+    }
+
+    public String getFecha() {
+        return Fecha;
+    }
+
+    public void setFecha(String Fecha) {
+        this.Fecha = Fecha;
+    }
+
+    public int getCodSocioeco() {
+        return codSocioeco;
+    }
+
+    public void setCodSocioeco(int codSocioeco) {
+        this.codSocioeco = codSocioeco;
+    }
+
+    public int getCodigoDoc() {
+        return codigoDoc;
+    }
+
+    public void setCodigoDoc(int codigoDoc) {
+        this.codigoDoc = codigoDoc;
+    }
+
+    public String getRutaDoc() {
+        return rutaDoc;
+    }
+
+    public void setRutaDoc(String rutaDoc) {
+        this.rutaDoc = rutaDoc;
+    }
+    
+    
+    
+    
  
        
 }

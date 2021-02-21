@@ -30,15 +30,16 @@ public class ConvocatoriaDAO {
       //ya esta loggeado como supervisor
       ServiceLocator myConn = ServiceLocator.getInstance();
       String strSQL = "INSERT INTO convocatoria (k_codigoConvocatoria, q_semestre, q_anio) VALUES(?,?,?)";
-      String strsql3 = "INSERT INTO convocatoria_proceso (k_codigoConvocatoria , k_tipoProceso,f_fechaInicioProceso, f_fechaFinProceso) VALUES(?,?,?,?)";
-      StringBuilder sql2 = new StringBuilder();
-      sql2.append("SELECT ADMIN.CONVOCA.NEXTVAL FROM DUAL");
+      String strsql3 = "INSERT INTO CONVOCATORIA_PROCESO (k_codigoConvocatoria , k_tipoProceso,f_fechaInicioProceso, f_fechaFinProceso) VALUES(?,?,?,?)";
+      String sql2 = "SELECT ADMIN.CONVOCA.NEXTVAL FROM DUAL";
       try {
         //insercion de una nueva convocatoria.
         Connection conexion = myConn.tomarConexion();
-        PreparedStatement ps2 = conexion.prepareStatement(sql2.toString());
+        PreparedStatement ps2 = conexion.prepareStatement(sql2);
         PreparedStatement ps = conexion.prepareStatement(strsql3);
+        
         ResultSet rs = ps2.executeQuery();
+        
         rs.next();
 
         int llave = Integer.parseInt(rs.getString(1));
@@ -47,8 +48,10 @@ public class ConvocatoriaDAO {
         prepStmt.setInt(1, llave); 
         prepStmt.setInt(2, convocatoria.getSemestre());
         prepStmt.setInt(3, convocatoria.getAnio());
-        
+     
         prepStmt.executeUpdate();
+       
+        
         prepStmt.close();
         myConn.commit();
         //para la tabla convocatoria_proceso
@@ -63,6 +66,7 @@ public class ConvocatoriaDAO {
         mensaje += "Convocatoria creada satisfactoriamente";
       } catch (SQLException e) {
            mensaje += "No se pudo crear la convocatoria: "+ e.getMessage();
+           e.printStackTrace();
       }  finally {
          ServiceLocator.getInstance().liberarConexion();
       }
@@ -75,19 +79,21 @@ public class ConvocatoriaDAO {
         //ya esta loggeado como supervisor
         ServiceLocator myConn = ServiceLocator.getInstance();
         try {
-        String sql = "UPDATE CONVOCATORIA SET Q_SEMESTRE = ? WHERE k_codigoConvocatoria = ?";
+        String sql = "update convocatoria set Q_SEMESTRE = ? where k_codigoConvocatoria = ?";
         Connection conn = myConn.tomarConexion();
         PreparedStatement ps = conn.prepareCall(sql);
             ps.setInt(1, semestre);
             ps.setInt(2, codigoCon);
                                   
             ps.executeUpdate();
+            System.out.println("prueba");
             ps.close();
             myConn.commit();
             mensaje += "Convocatoria modificada";
          } 
          catch(SQLException e) {
-             mensaje += "Error al modificar convocatoria: "+ e;
+             mensaje += "Error al modificar convocatoria: "+ e.getMessage();
+             e.printStackTrace();
          } finally {
              myConn.liberarConexion();
          }
@@ -126,7 +132,7 @@ public class ConvocatoriaDAO {
         
         ServiceLocator myConn = ServiceLocator.getInstance();
         try {
-        String sql = "UPDATE CONVOCATORIA_PROCESO SET f_fechaInicioProceso = ?, f_fechaFinProceso = ? WHERE k_codigoConvocatoria = ?";
+        String sql = "UPDATE ADMIN.CONVOCATORIA_PROCESO SET f_fechaInicioProceso = ?, f_fechaFinProceso = ? WHERE k_codigoConvocatoria = ?";
         
         Connection conn = myConn.tomarConexion();
         PreparedStatement ps = conn.prepareCall(sql);
