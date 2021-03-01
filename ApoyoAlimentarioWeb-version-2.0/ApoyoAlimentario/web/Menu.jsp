@@ -39,7 +39,12 @@ msg = (String)session.getAttribute("error");
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ml-auto">
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="ValidarSolicitud.jsp">Validar solicitudes</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="CrearSolicitud.jsp">Crear Solicitud</a></li>                            
+                        <form id="crear" name="crear" method="POST" action="MostrarConvocatoriasSolicitud">
+                            <input type="hidden" value="<%=usuario%>" name="usuario">
+                            <input type="hidden" value="<%=contra%>" name="contraseña">
+                            <li class="nav-item"><a href="#" class="nav-link js-scroll-trigger" onclick="document.getElementById('crear').submit()">Crear solicitud</a></li>
+                        </form>
+                                                    
                             <li class="nav-item"><a class="nav-link js-scroll-trigger" href="EstadoProceso.jsp">Estado del Proceso</a></li>
 
                         

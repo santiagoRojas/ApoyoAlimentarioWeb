@@ -120,11 +120,27 @@ button:hover {
   font-size: 15px;
   font-weight: 700;
 }
+#namel {
+    width: 360px;
+    height: 50px;
+}
 
 .form-row .value {
   width: -webkit-calc(100% - 125px);
   width: -moz-calc(100% - 125px);
   width: calc(100% - 125px);
+}
+
+#mayoracuatro {
+    margin-left: 28px;
+}
+
+#dosatres {
+    margin-left: 33px;
+}
+
+#acomodar {
+    margin-left: 8px;
 }
 
 @media (max-width: 767px) {
@@ -630,6 +646,14 @@ input {
   position: relative;
 }
 
+#enviarsol {
+    margin-left: 347px;
+}
+
+#backM {
+    margin-top: -50px;
+}
+
 @media (max-width: 767px) {
   .input-group-desc {
     margin-bottom: 40px;
@@ -758,6 +782,12 @@ input {
 /* ==========================================================================
    #TITLE
    ========================================================================== */
+#Tit {
+    color: #555;
+    font-size: 30px;
+    margin-left: -1%;
+}
+
 .title {
   font-size: 24px;
   text-transform: uppercase;
@@ -788,13 +818,18 @@ input {
 
 .card-5 .card-heading {
   padding: 20px 0;
-  background: #1a1a1a;
+  background: #E67E22;
   -webkit-border-top-left-radius: 10px;
   -moz-border-radius-topleft: 10px;
   border-top-left-radius: 10px;
   -webkit-border-top-right-radius: 10px;
   -moz-border-radius-topright: 10px;
   border-top-right-radius: 10px;
+}
+
+#verconvocatorias {
+    margin-left: 155px;
+    margin-top: -26px;
 }
 
 .card-5 .card-body {

@@ -27,10 +27,11 @@ Convocatoria convocatoria = new Convocatoria();
     <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
     <!-- Font special for pages-->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/js/all.min.js"></script>
     <!-- Vendor CSS-->
     <link href="vendor/select2/select2.min.css" rel="stylesheet" media="all">
     <link href="vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" rel="stylesheet">
 
     <!-- Main CSS-->
     <link href="css/styles.css" rel="stylesheet" />
@@ -47,25 +48,48 @@ Convocatoria convocatoria = new Convocatoria();
                     
                 </div>
                 
+                    
                 <%  if(convocatorias != null){
                     for(int i=0; i<convocatorias.size(); i++){ %>
+                    
+                    
                     <form method="POST" action="ModificsrConvocatoriaServlet">
-                     <input type="hidden" value="<%=usuario%>" name="usuario">
-                     <input type="hidden" value="<%=contra%>" name="contraseña">
-                     <input type="hidden" value="<%=convocatorias.get(i).getCodigo() %>" name="codigo">
-                    <div class="name">Año:</div><input type="text" name="año" id="año" value=<%=convocatorias.get(i).getAnio() %>>  
-                    <div class="name">Semestre:</div><input type="text" name="semestre" id="semestre" value=<%=convocatorias.get(i).getSemestre() %>>
-                    <div class="name">Tipo de Proceso:</div><input type="text" name="tipoProceso" id="tipoProceso" value=<%=convocatorias.get(i).getTipoProceso() %>> 
-                    <div class="name">Fecha de inicio:</div><input type="date" name="fechaInicio" id="fechaInicio" value=<%=convocatorias.get(i).getFechaInicio() %>> 
-                    <div class="name">Fecha de fin:</div><input type="date" name="fechaFin" id="fechaFin" value=<%=convocatorias.get(i).getFechaFin() %>> 
-                    <button class="btn btn--radius-2 btn--red" type="submit">Modificar</button>
+                    <table class="table">
+                        <thead class="thead-dark">
+                        <tr>
+                        <th scope="col">Año</th>
+                        <th scope="col">Semestre</th>
+                        <th scope="col">Tipo de proceso</th>
+                        <th scope="col">Fecha de inicio</th>
+                        <th scope="col">Fecha de fin</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <input type="hidden" value="<%=usuario%>" name="usuario">
+                            <input type="hidden" value="<%=contra%>" name="contraseña">
+                            <input type="hidden" value="<%=convocatorias.get(i).getCodigo() %>" name="codigo">
+                            <td><input type="text" name="año" id="año" size="4" maxlength="4" value=<%=convocatorias.get(i).getAnio() %>></td>
+                            <td><input type="text" name="semestre" id="semestre" size="8" maxlength="8" value=<%=convocatorias.get(i).getSemestre() %>></td>
+                            <td><input type="text" name="tipoProceso" id="tipoProceso" size="14" maxlength="14" value=<%=convocatorias.get(i).getTipoProceso() %>></td>
+                            <td><input type="date" name="fechaInicio" id="fechaInicio" value=<%=convocatorias.get(i).getFechaInicio() %>></td>
+                            <td><input type="date" name="fechaFin" id="fechaFin" value=<%=convocatorias.get(i).getFechaFin() %>></td>
+                            <td><button  type="submit"><i class="fas fa-pen-square fa-2x" style="color:#239B56;"></i></button></td>
+                            <td><button type="submit" form="eliminar" value=""><i class="fas fa-times-circle fa-2x" style="color:#E74C3C;"></i></button></td>
+                        </tr>
+                        </tbody>
+                        </table>  
                     </form>
-                    <form method="POST" action="EliminarConvocatoriaServlet" >
+                    <form name="eliminar" id="eliminar" method="POST" action="EliminarConvocatoriaServlet" >
                      <input type="hidden" value="<%=usuario%>" name="usuario">
                      <input type="hidden" value="<%=contra%>" name="contraseña">
                      <input type="hidden" value="<%=convocatorias.get(i).getCodigo() %>" name="codigo"> 
-                    <button class="btn btn--radius-2 btn--red" type="submit">Eliminar</button>
                     </form>
+                    
+                    
+                
                    
                     
                 <%} }%>
@@ -77,7 +101,7 @@ Convocatoria convocatoria = new Convocatoria();
                       <input type="hidden" value="<%=usuario%>" name="usuario">
                       <input type="hidden" value="<%=contra%>" name="contraseña">
                     <div id="verconvocatorias">
-                        <button class="btn btn--radius-2 btn--red" type="submit">Ver Convocatorias</button>
+                        <button id="verconvocatorias" name="verconvocatorias" class="btn btn--radius-2 btn--red" type="submit">Ver Convocatorias</button>
                     </div>
                     </form>
                     

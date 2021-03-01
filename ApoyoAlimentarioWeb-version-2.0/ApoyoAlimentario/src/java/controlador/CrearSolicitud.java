@@ -45,7 +45,7 @@ public class CrearSolicitud extends HttpServlet {
         String codigo = request.getParameter("codigo");
         int convocatoria = Integer.parseInt(request.getParameter("numconvocatoria"));
         int sostienemismo = Integer.parseInt(request.getParameter("sostienemismo"));
-        /*String FormularioSolicitudApoyoAlimentario = (request.getParameter("lformSolicitudapoyo"));
+        String FormularioSolicitudApoyoAlimentario = (request.getParameter("lformSolicitudapoyo"));
         String CartaDirectorBienestar = request.getParameter("lcartadirector");
         String CertificadoEstratificacion = request.getParameter("lcertificadoestratificacion");
         String ReciboPublico = request.getParameter("lrecibopublico");
@@ -54,7 +54,7 @@ public class CrearSolicitud extends HttpServlet {
         String CertificadoCivilNacimientoHijos = request.getParameter("lnacimientohijos");
         String CertificadoDiscapacidadMedica = (request.getParameter("ldiscapacidadmedica"));
         String CertificadoIngresos = request.getParameter("lingresos");
-        String ExamenDiagnosticoMedico = request.getParameter("lediagnosticomedico");*/
+        String ExamenDiagnosticoMedico = request.getParameter("lediagnosticomedico");
         int condicion = Integer.parseInt(request.getParameter("condicion"));
         int discapacidad = Integer.parseInt(request.getParameter("discapacidad"));
         int ifamiliar = Integer.parseInt(request.getParameter("IFamiliar"));
