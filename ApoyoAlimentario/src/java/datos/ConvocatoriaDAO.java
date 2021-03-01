@@ -32,6 +32,10 @@ public class ConvocatoriaDAO {
       String strSQL = "INSERT INTO convocatoria (k_codigoConvocatoria, q_semestre, q_anio) VALUES(?,?,?)";
       String strsql3 = "INSERT INTO CONVOCATORIA_PROCESO (k_codigoConvocatoria , k_tipoProceso,f_fechaInicioProceso, f_fechaFinProceso) VALUES(?,?,?,?)";
       String sql2 = "SELECT ADMIN.CONVOCA.NEXTVAL FROM DUAL";
+      String strsql4 = "INSERT INTO TIPOAPOYO_CONVOCATORIA (k_codigoconvocatoria, k_tipoApoyo, q_cuposTotales, q_cuposDisponibles) VALUES (?,1,"+convocatoria.getCupostotales()+","+convocatoria.getCuposdisponibles()+")";
+      String strsql5 = "INSERT INTO TIPOAPOYO_CONVOCATORIA (k_codigoconvocatoria, k_tipoApoyo, q_cuposTotales, q_cuposDisponibles) VALUES (?,2,"+convocatoria.getCupostotales()+","+convocatoria.getCuposdisponibles()+")";
+      String strsql6 = "INSERT INTO TIPOAPOYO_CONVOCATORIA (k_codigoconvocatoria, k_tipoApoyo, q_cuposTotales, q_cuposDisponibles) VALUES (?,3,"+convocatoria.getCupostotales()+","+convocatoria.getCuposdisponibles()+")";
+      
       try {
         //insercion de una nueva convocatoria.
         Connection conexion = myConn.tomarConexion();
@@ -61,7 +65,28 @@ public class ConvocatoriaDAO {
         ps.setDate(4, convocatoria.getFechaFin());
         ps.executeUpdate();
         ps.close();
-        myConn.commit();
+       
+        
+        
+        //LLENADO DE LA TABLA TIPOAPOYO_CONVOCATORIA
+        PreparedStatement ps3 = conexion.prepareStatement(strsql4);
+        ps3.setInt(1, llave);//inserta la llave de convocatoria
+        ps3.executeUpdate();
+        ps3.close();
+        
+        PreparedStatement ps4 = conexion.prepareStatement(strsql5);
+        ps4.setInt(1, llave);//inserta la llave de convocatoria
+        ps4.executeUpdate();
+        ps4.close();
+        
+        PreparedStatement ps5 = conexion.prepareStatement(strsql6);
+        ps5.setInt(1, llave);//inserta la llave de convocatoria
+        ps5.executeUpdate();
+        ps5.close();
+        
+        
+        
+         myConn.commit();
         
         mensaje += "Convocatoria creada satisfactoriamente";
       } catch (SQLException e) {
@@ -175,8 +200,8 @@ public class ConvocatoriaDAO {
             myConn.commit();
             mensaje += "Convocatoria Eliminada Satisfactoriamente...";
             
-        } catch (Exception e) {
-            mensaje += "Error al eliminar convocatoria: "+ e;
+        } catch (SQLException e) {
+            mensaje += "Error al eliminar convocatoria: "+ e.getMessage();
         }
         
         return mensaje;
@@ -215,8 +240,8 @@ public class ConvocatoriaDAO {
             mensaje += "Transacción realizada";  
             
             ms.mensaje = mensaje;   
-        } catch (Exception e) {
-            mensaje += "Error al obtener las convocatorias... "+e.initCause(e);
+        } catch (SQLException e) {
+            mensaje += "Error al obtener las convocatorias... "+e.getMessage();
             ms.mensaje = mensaje;
         }
 

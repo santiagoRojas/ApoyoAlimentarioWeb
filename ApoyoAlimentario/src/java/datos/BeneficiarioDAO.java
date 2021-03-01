@@ -14,20 +14,28 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import negocio.Beneficiario;
 import negocio.Controlador;
+import static oracle.net.aso.e.c;
+import oracle.net.aso.m;
+import static oracle.security.o3logon.a.c;
 import util.RHException;
 import util.ServiceLocator;
 
+
 public class BeneficiarioDAO {
+    
+    
     String mensaje = "";
     Controlador control = new Controlador();
     
     public BeneficiarioDAO(){
         
-    }
-        public String incluirBeneficiario(Beneficiario beneficiario, String usuario, String contrasenia){
         
+    }
+    
+        public String incluirBeneficiario(Beneficiario beneficiario, String usuario, String contrasenia){
         ServiceLocator myConn = ServiceLocator.getInstance();
         String sql2 ="SELECT BENEF.NEXTVAL FROM DUAL";
         String strSQL = "INSERT INTO BEN (k_idBeneficiario, n_nombreBeneficiario, n_apellidoBeneficiario, n_estadoBeneficiario, k_tipoApoyo, k_numeroRetiro, k_codigoConvocatoria) VALUES(?,?,?,?,?,?,?)";
@@ -59,7 +67,7 @@ public class BeneficiarioDAO {
         mensaje +="Beneficiario agregado correctamente... ";
         crearUsuarioBeneficiario(usuario, contrasenia);
         
-      } catch (SQLException e) {
+      }catch (SQLException e) {
           int code = e.getErrorCode();
           if(code == 1)
               System.out.println("No se puede crear el usuario: "+usuario+", el código: "+beneficiario.getId()+" Ya existe...");
@@ -71,7 +79,7 @@ public class BeneficiarioDAO {
       
     }
         
-     public String modificarBeneficiario(Beneficiario beneficiario)throws RHException{
+     public String modificarBeneficiario(Beneficiario beneficiario){
          try {
              String strSQL = "UPDATE beneficiario SET N_ESTADO = ?";
         Connection conexion = ServiceLocator.getInstance().tomarConexion();
@@ -88,7 +96,7 @@ public class BeneficiarioDAO {
         return mensaje;
     }
     
-    public Beneficiario buscarBeneficiario(Integer beneficiario_id) throws RHException{
+    public Beneficiario buscarBeneficiario(Integer beneficiario_id){
       Beneficiario b = new Beneficiario(); //Instancia el objeto para retornar los datos del beneficiario
       try{
          String strSQL = "SELECT beneficiario_id, estado FROM beneficiario WHERE beneficiario_id = ?";
@@ -151,6 +159,47 @@ public class BeneficiarioDAO {
 
       return mensaje;
         
-    }   
+    }
+     
+     public String informarBeneficiarioAceptado(){
+        Correitos co = new Correitos();
+        
+        //Correos metodo = nuevo.getClass().getDeclaredMethod("metodo_3", new Class[0]);
+   
+        StringBuilder sql;
+        sql = new StringBuilder();
+        sql.append("SELECT b.k_idbeneficiario, e.n_correoestudiante " +
+                    "FROM ESTUDIANTE E, BENEFICIARIO B, tipoapoyo_convocatoria TAC, CONVOCATORIA C, SOLICITUD S " +
+                    "WHERE tac.k_codigoconvocatoria = b.k_codigoconvocatoria AND tac.k_tipoapoyo = b.k_tipoapoyo AND c.k_codigoconvocatoria = tac.k_codigoconvocatoria " +
+                    "AND c.k_codigoconvocatoria = s.k_codigoconvocatoria AND s.k_codigoestudiante = e.k_codigoestudiante");
+         ServiceLocator myConn = ServiceLocator.getInstance();
+        try {
+
+           Connection conn = myConn.tomarConexion();
+           PreparedStatement ps = conn.prepareCall(sql.toString());
+           ResultSet rs = ps.executeQuery();
+           
+          // ArrayList<String> correos = new ArrayList<String>();
+           
+            while(rs.next()) {
+                //correos.add();
+                try {
+                    co.enviar(rs.getString(1), "RESULTADOS APOYO", "Usted ha sido admitido al apoyo alimentario");
+                } catch (Exception e) {
+                    System.out.println("Fallo!!!");
+                }
+                
+            }
+  
+            mensaje += "Transacción realizada"; 
+            
+        } catch (SQLException e) {
+            mensaje+= e.getMessage();
+        } finally {
+            myConn.liberarConexion();
+        }
+        return mensaje;
+        
+    }
     
 }

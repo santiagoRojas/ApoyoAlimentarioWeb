@@ -205,7 +205,7 @@ public class SolicitudDAO {
           mensaje += " Transacción realizada";  
           PedirSolicitudes solicitudes = new PedirSolicitudes(solicitudess, mensaje);
           return solicitudes;
-      } catch (Exception e) {
+      } catch (SQLException e) {
           solicitudess = null;
          mensaje = "Error: "+e.getMessage();
          e.getStackTrace();
@@ -266,7 +266,7 @@ public class SolicitudDAO {
             myConn.commit();
             mensaje += "Solicitud Eliminada Satisfactoriamente...";
             
-        } catch (Exception e) {
+        } catch (SQLException e) {
             mensaje += "Error al eliminar socioeconomico: "+ e;
         }
         
